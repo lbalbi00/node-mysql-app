@@ -13,7 +13,7 @@ const dbConfig = {
 app.get('/', async (req, res) => {
   const conn = await mysql.createConnection(dbConfig);
   await conn.execute(`CREATE TABLE IF NOT EXISTS visits (visited_at DATETIME)`);
-  await conn.execute(`INSERT INTO visits VALUES (NOW())`);
+  await conn.execute(`INSERT INTO visits VALUES (DATE_ADD(NOW(), INTERVAL 5 MINUTE)`);
   const [rows] = await conn.execute(`SELECT * FROM visits`);
   await conn.end();
 
